@@ -2,11 +2,11 @@ const mongoose=require("mongoose")
 const User_formation_Schema=new mongoose.Schema({
     id_user:{
         type:mongoose.Schema.Type.ObjectId,
-        ref:users
+        ref:"users"
     },
     id_formation:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:Formations
+      ref:"Formations"
     },
 })
 const user_formation=mongoose.model('Users_formations',User_formation_Schema)
