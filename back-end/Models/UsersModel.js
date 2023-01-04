@@ -27,9 +27,8 @@ const UsersSchema = new mongoose.Schema({
   },
   id_organisme: [
     {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Organismes",
-    type:String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Organismes",
     },
   ],
 });
