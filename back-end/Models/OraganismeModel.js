@@ -2,20 +2,24 @@ const mongoose=require("mongoose")
 const OrganismeSchema=new mongoose.Schema({
     
     name_organisme:{
-        tyoe:String,
-        required:true
+        type:String,
+        required:true,
+        unique:[true,"name organisme must be unique"]
+
     },
     ville:{
-        tyoe:String,
+        type:String,
         required:true
     },
     Address:{
-        tyoe:String,
+        type:String,
         required:true
     },
     phone:{
-        tyoe:Number,
-        required:true
+        type:Number,
+        required:true,
+        unique:[true,"phone must be unique"]
+
     }
     
 })
