@@ -2,18 +2,21 @@ const mongoose=require("mongoose")
 const FormationSchema=new mongoose.Schema({
     Name_Formation:{
         type:String,
-        required:true
+        required:true,
+        unique:[true,"name Formation must be unique"]
+
     },
     Image_formation:{
         type:String,
         required:true
+        
     },
     Date_debut:{
-        type:Date,
+        type:String,
         required:true
     },
     Date_Fin:{
-        type:Date,
+        type:String,
         required:true
     },
     Desciption:{

@@ -8,7 +8,6 @@ const Ajouterorganisme=asyncHandler(async(req,res)=>{
         ville:req.body.ville,
         Address:req.body.Address,
         phone:req.body.phone
-
     })
     res.status(201).json({Organisme})
     
