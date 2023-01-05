@@ -10,11 +10,14 @@ app.use(express.urlencoded({extended:true}))
 
 const Auth=require('./Routes/AuthRoute')
 const AdminRoute=require('./Routes/AdminRoute')
-const EmployeeRoute=require("./Routes/EmployeeRoute")
-
 
 app.use('/api/auth',Auth)
 app.use('/api/admin',AdminRoute)
+app.all('*',(req,res,next)=>{
+   res.send("Page note found !!!")
+
+})
+
 
 
 

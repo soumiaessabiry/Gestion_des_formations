@@ -1,10 +1,11 @@
 const formationModel=require("../Models/FormationModel")
 const jwt=require('jsonwebtoken')
 const dotenv=require("dotenv")
-const asyncHandler = require('express-async-handler')
+const ApiError=require("../middlewares/CatchError")
 
 
- const Ajouterformation=asyncHandler(async(req,res)=>{
+
+ const Ajouterformation=async(req,res)=>{
     const Formation=await formationModel.create({
         Name_Formation:req.body.Name_Formation,
         Image_formation:req.body.Image_formation,
@@ -14,7 +15,7 @@ const asyncHandler = require('express-async-handler')
         
     })
     res.status(201).json({Formation})
-})
+}
 
 
 
