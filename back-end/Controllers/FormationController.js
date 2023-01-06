@@ -38,8 +38,16 @@ const ApiError=require("../middlewares/CatchError")
             throw Error("Error to update Formation")
         }
  }
-
+const DeletFormation=async(req,res)=>{
+    const Delet_Formation=await formationModel.findOneAndRemove({_id:req.params.id})
+    if(Delet_Formation){
+        res.status(200).send("Success delet formation")
+    }else{
+        throw Error("Error to delet Formation")
+    }
+}
 module.exports={
     Ajouterformation,
-    UpdateFormation
+    UpdateFormation,
+    DeletFormation
 }
