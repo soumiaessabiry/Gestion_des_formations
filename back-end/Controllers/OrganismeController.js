@@ -8,7 +8,12 @@ const Ajouterorganisme=async(req,res)=>{
         Address:req.body.Address,
         phone:req.body.phone
     })
-    res.status(201).json({Organisme})
-    
+    .then((Organisme)=>{
+        res.status(201).json({Organisme})
+
+    })   
+    .cath((err)=>{
+        throw Error("Error to add Organisme")
+    }) 
 }
 module.exports={Ajouterorganisme}

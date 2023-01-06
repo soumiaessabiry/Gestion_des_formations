@@ -14,10 +14,15 @@ const ApiError=require("../middlewares/CatchError")
         Desciption:req.body.Desciption,
         
     })
-    res.status(201).json({Formation})
-}
+    .then((Formation)=>{
+        res.status(201).json({Formation})
+    })
+    .catch((err)=>{
+       throw Error("Error to add Formation")
 
+    })
 
+ }
 
 
 module.exports={
