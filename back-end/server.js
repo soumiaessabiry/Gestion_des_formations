@@ -9,10 +9,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 const Auth=require('./Routes/AuthRoute')
-const AdminRoute=require('./Routes/AdminRoute')
+const formationRoute=require('./Routes/AdminRouter/FormationRoute')
+const organismeRoute=require('./Routes/AdminRouter/OrganismRoute')
 
 app.use('/api/auth',Auth)
-app.use('/api/admin',AdminRoute)
+app.use('/api/formation',formationRoute)
+app.use('/api/organisme',organismeRoute)
 app.all('*',(req,res,next)=>{
    res.send("Page note found !!!")
 

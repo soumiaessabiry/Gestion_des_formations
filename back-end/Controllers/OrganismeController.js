@@ -8,12 +8,29 @@ const Ajouterorganisme=async(req,res)=>{
         Address:req.body.Address,
         phone:req.body.phone
     })
+    
     .then((Organisme)=>{
         res.status(201).json({Organisme})
+    })
+    .catch((err)=>{
+       throw Error("Error to add Organisme")
 
-    })   
-    .cath((err)=>{
-        throw Error("Error to add Organisme")
-    }) 
+    })
 }
-module.exports={Ajouterorganisme}
+const UpdateOrganisme=async(req,res)=>{
+
+    const Update_Organisme=await OrganismeModel.findOneAndUpdate({_id:req.params.id},{$set:{name_organisme:req.body.name_organisme,ville:req.body.ville,phone:req.body.phone}})
+    .then((Update_Organisme)=>{
+        res.status(200).json({Update_Organisme})
+    })
+    .catch((err)=>{
+        throw Error("Error to Update Organisme")
+
+    })
+
+    
+}
+module.exports={
+    Ajouterorganisme,
+    UpdateOrganisme
+}

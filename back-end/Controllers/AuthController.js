@@ -8,7 +8,7 @@ var bcrypt = require('bcryptjs');
  const Login=(req,res,next)=>{
     res.send("hello login")
 }
- const AjouterEmployee=async(req,res,next)=>{
+ const AjouterEmployee=async(req,res)=>{
     let email_user=req.body.email
     let password=req.body.password
     let id_organisme=req.body.id_organisme
