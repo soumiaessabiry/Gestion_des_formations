@@ -36,6 +36,14 @@ const DeletOrganisme=async(req,res)=>{
         }
         
 }
+const AfficherOrganismes=async(req,res)=>{
+    const Affiche_Organismes=await OrganismeModel.find()
+    if(Affiche_Organismes.length>0){
+        res.status(200).json({Affiche_Organismes})
+    }else{
+        throw Error("you don't have any Organismes")
+    }
+}
 
 
 
@@ -43,5 +51,6 @@ const DeletOrganisme=async(req,res)=>{
 module.exports={
     Ajouterorganisme,
     UpdateOrganisme,
-    DeletOrganisme
+    DeletOrganisme,
+    AfficherOrganismes
 }
