@@ -6,7 +6,7 @@ const FormationSchema=new mongoose.Schema({
         unique:[true,"name Formation must be unique"]
 
     },
-    Image_formation:{
+    image:{
         type:String,
         required:true
         

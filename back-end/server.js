@@ -3,10 +3,15 @@ const app=express()
 const dotenv=require('dotenv').config()
 const port=process.env.port
 const bodyparser=require("body-parser")
+const multer=require ('multer') 
 const db=require("./Config/database")
+const path = require('path')
+
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(express.static(path.join(__dirname,"images")))
 
 const Auth=require('./Routes/AuthRoute')
 const formationRoute=require('./Routes/AdminRouter/FormationRoute')
