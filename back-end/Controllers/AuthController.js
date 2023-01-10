@@ -5,10 +5,24 @@ const dotenv=require("dotenv")
 var bcrypt = require('bcryptjs');
 
 
- const Login=(req,res,next)=>{
-    res.send("hello login")
+const Login=async(req,res)=>{
+    let email=req.body.email
+    let password=req.body.password
+    const Check_User=await userModel.findOne({email:email})
+    if(Check_User){
+        const compar_password=await bcrypt.compare(password,Check_User.password)
+        if(compar_password){
+            res.status(200).json({msg:"Welcom"+Check_User.First_name+Check_User.Last_name})
+        }else{
+            throw Error(" Sorry Password is Inccorect ")
+        }
+    }else{
+        throw Error(" Sorry Users is note existe ")
+    }
 }
- const AjouterEmployee=async(req,res)=>{
+
+
+const AjouterEmployee=async(req,res)=>{
     let email_user=req.body.email
     let password=req.body.password
     let id_organisme=req.body.id_organisme
@@ -36,13 +50,6 @@ var bcrypt = require('bcryptjs');
 
         }
     }
-   
-
-  
-   
-  
-    
-    
 }
 
 
