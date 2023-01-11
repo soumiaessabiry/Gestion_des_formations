@@ -5,8 +5,14 @@ const dotenv=require("dotenv")
 const  bcrypt = require('bcryptjs');
 const SECRET=process.env.SECRET
 const ls=require("local-storage")
+const Joi=require("joi")
+const {validation_user}=require("../middlewares/ValidationJoi")
 
 const Login=async(req,res)=>{
+    const {error}=validation_user(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     let email=req.body.email
     let password=req.body.password
     const Check_User=await userModel.findOne({email:email})
@@ -27,6 +33,10 @@ const Login=async(req,res)=>{
 
 
 const AjouterEmployee=async(req,res)=>{
+    const {error}=validation_user(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     let email_user=req.body.email
     let password=req.body.password
     let id_organisme=req.body.id_organisme

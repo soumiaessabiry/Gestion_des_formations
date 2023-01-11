@@ -4,21 +4,29 @@ const OrganismeSchema=new mongoose.Schema({
     name_organisme:{
         type:String,
         required:true,
-        unique:[true,"name organisme must be unique"]
+        unique:[true,"name organisme must be unique"],
+        trim:true
+
 
     },
     ville:{
         type:String,
-        required:true
+        required:true,
+        trim:true
+
     },
     Address:{
         type:String,
-        required:true
+        required:true,
+        trim:true
+
     },
     phone:{
         type:Number,
         required:true,
-        unique:[true,"phone must be unique"]
+        unique:[true,"phone must be unique"],
+        trim:true
+
 
     }
     

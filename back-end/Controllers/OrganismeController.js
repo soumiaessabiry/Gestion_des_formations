@@ -1,7 +1,12 @@
 const OrganismeModel=require("../Models/OraganismeModel")
 const dotenv=require('dotenv')
+const {validation_Organisme}=require("../middlewares/ValidationJoi")
 
 const Ajouterorganisme=async(req,res)=>{
+    const {error}=validation_Organisme(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     const Organisme=await OrganismeModel.create({
         name_organisme:req.body.name_organisme,
         ville:req.body.ville,
@@ -18,6 +23,10 @@ const Ajouterorganisme=async(req,res)=>{
     })
 }
 const UpdateOrganisme=async(req,res)=>{
+    const {error}=validation_Organisme(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     const Update_Organisme=await OrganismeModel.findOneAndUpdate({_id:req.params.id},{$set:{name_organisme:req.body.name_organisme,ville:req.body.ville,phone:req.body.phone}})
     .then((Update_Organisme)=>{
         res.status(200).json({Update_Organisme})
