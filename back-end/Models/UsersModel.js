@@ -22,15 +22,13 @@ const UsersSchema = new mongoose.Schema({
     required: true,
   },
   Role: {
-    type: String,
-    required: true,
+    type:String,
+    default:'employee'
   },
-  id_organisme: [
-    {
+  id_organisme:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Organismes",
     },
-  ],
 });
 const Users = mongoose.model("users", UsersSchema);
 module.exports = Users;

@@ -13,7 +13,7 @@ const Login=async(req,res)=>{
     if(Check_User){
         const compar_password=await bcrypt.compare(password,Check_User.password)
         if(compar_password){
-            const token=jwt.sign({Check_User},SECRET)
+            const token=jwt.sign({_id:Check_User._id,email:Check_User.email,Role:Check_User.Role,First_name:Check_User.First_name},SECRET)
             ls.set("token",token)
             // res.status(200).json({msg:"Welcom"+Check_User.First_name+Check_User.Last_name})
             res.status(200).json({token})
@@ -44,7 +44,6 @@ const AjouterEmployee=async(req,res)=>{
                 email:email_user,
                 phone:req.body.phone,
                 password:hashPassword,
-                Role:req.body.Role,
                 id_organisme:id_organisme,
                
             })
