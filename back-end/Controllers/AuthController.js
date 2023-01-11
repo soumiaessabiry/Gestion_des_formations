@@ -2,8 +2,9 @@ const userModel=require("../Models/UsersModel")
 const OrganismeModel=require("../Models/OraganismeModel")
 const jwt=require('jsonwebtoken')
 const dotenv=require("dotenv")
-var bcrypt = require('bcryptjs');
-
+const  bcrypt = require('bcryptjs');
+const SECRET=process.env.SECRET
+const ls=require("local-storage")
 
 const Login=async(req,res)=>{
     let email=req.body.email
@@ -12,7 +13,10 @@ const Login=async(req,res)=>{
     if(Check_User){
         const compar_password=await bcrypt.compare(password,Check_User.password)
         if(compar_password){
-            res.status(200).json({msg:"Welcom"+Check_User.First_name+Check_User.Last_name})
+            const token=jwt.sign({Check_User},SECRET)
+            ls.set("token",token)
+            // res.status(200).json({msg:"Welcom"+Check_User.First_name+Check_User.Last_name})
+            res.status(200).json({token})
         }else{
             throw Error(" Sorry Password is Inccorect ")
         }
@@ -51,11 +55,20 @@ const AjouterEmployee=async(req,res)=>{
         }
     }
 }
+const Logout=(req,res)=>{
+    const logout_user=ls.clear()
+    if(logout_user){
+        res.status(200).json("by by")
+    }else{
+            throw Error("error pour logout")
 
+    }
+}
 
 
 
 module.exports={
     Login,
-    AjouterEmployee
+    AjouterEmployee,
+    Logout
 }
