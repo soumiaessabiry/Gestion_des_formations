@@ -5,7 +5,6 @@ const errorHandller=require("../middlewares/ErrorHandler")
 const CatchError=require("../middlewares/CatchError")
 router.post('/login',CatchError(Login))
 router.get('/Logout',CatchError(Logout))
-
 router.use(errorHandller);
 
 module.exports= router;
