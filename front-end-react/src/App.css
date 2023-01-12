@@ -1,3 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:cursive;
+    
+}
+.row{
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px;
 
+}
+.title{
+    color:blue;
+    margin-bottom: 23px;
+    font-weight:bolder;
+}
+img{
+border-top-left-radius: 15px;
+border-bottom-left-radius: 15px;
+}
+.login{
+border-radius: 10px;
+}
+.login h1{
+    font-size: 3rem;
+    font-weight: 700;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.inp{
+    height: 60px;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 13px burlywood;
+    padding: 20px !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    
 
- 
+}
+label{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.btnlog{
+    height: 60px;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    background-color: blue;
+    color: azure;
+} 
