@@ -14,6 +14,8 @@ const FormationSchema=new mongoose.Schema({
     Date_debut:{
         type:String,
         required:true
+
+  
     },
     Date_Fin:{
         type:String,

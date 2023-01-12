@@ -15,8 +15,8 @@ const validation_formation=(data)=>{
     const schema=Joi.object({
         Name_Formation:Joi.string().alphanum().min(3).max(15),
         image:Joi.string(),
-        Date_debut:Joi.string().alphanum().min(3).max(15),
-        Date_Fin:Joi.string().alphanum().min(3).max(15),
+        Date_debut:Joi.string(),
+        Date_Fin:Joi.string(),
         Desciption:Joi.string().alphanum().min(3).max(255),
     })
     return  schema.validate(data) 
