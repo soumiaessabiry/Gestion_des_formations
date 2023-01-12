@@ -1,11 +1,10 @@
 const userModel=require("../Models/UsersModel")
 const OrganismeModel=require("../Models/OraganismeModel")
 const jwt=require('jsonwebtoken')
-const dotenv=require("dotenv")
+const  env=require("dotenv")
 const  bcrypt = require('bcryptjs');
 const SECRET=process.env.SECRET
 const ls=require("local-storage")
-const Joi=require("joi")
 const {validation_user}=require("../middlewares/ValidationJoi")
 
 const Login=async(req,res)=>{

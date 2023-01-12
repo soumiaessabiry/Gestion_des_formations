@@ -1,4 +1,5 @@
 const Joi =require("joi")
+
 const validation_user=(data)=>{
     const schema=Joi.object({
         First_name:Joi.string().alphanum().min(3).max(15),
@@ -11,6 +12,7 @@ const validation_user=(data)=>{
 
    
 }
+
 const validation_formation=(data)=>{
     const schema=Joi.object({
         Name_Formation:Joi.string().alphanum().min(3).max(15),
@@ -21,6 +23,7 @@ const validation_formation=(data)=>{
     })
     return  schema.validate(data) 
 }
+
 const validation_Organisme=(data)=>{
     const schema=Joi.object({
         name_organisme:Joi.string().alphanum().min(3).max(15),
