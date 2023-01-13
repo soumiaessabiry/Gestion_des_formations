@@ -1,11 +1,7 @@
-import Container from "react-bootstrap/esm/Container";
-import { FaDollyFlatbed} from "react-icons/fa";
 import { FcReading,FcConferenceCall,FcDepartment} from "react-icons/fc";
 import { HiOutlineLogout} from "react-icons/hi";
 import Sidebar from "../sidebar";
-import { NavLink } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 const bgg={'background':'#0a58ca'}
 const over={'overflow': 'auto'}
 const icon={"fontSize": "35px","color":"brown"}

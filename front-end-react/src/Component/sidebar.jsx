@@ -1,25 +1,12 @@
-import Container from "react-bootstrap/esm/Container";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BsPersonPlusFill ,BsFillCartPlusFill,BsPersonPlus ,BsFillEmojiSmileUpsideDownFill,BsTextIndentLeft,BsFillArrowRightCircleFill} from "react-icons/bs";
+import {BsFillArrowRightCircleFill} from "react-icons/bs";
 
-
-const styleFc={'fontSize':'41px', 'marginTop':' 15px','marginleft':'-15px', 'fontWeight': 'bolder','fontSize':'40px','color':'azure'}
-const logo={'borderRadius': '35px','marginTop':' 10px'}
-const icon={"fontSize": "35px"}
+const styleFc={ 'marginTop':' 15px','marginleft':'-15px', 'fontWeight': 'bolder','fontSize':'40px','color':'azure'}
 const sid={'marginTop':"90px"}
 const navlik={
     "textDecoration": 'none' ,
     "color":'azure',
-
-}
-const navlik2={
-    'border': 'none' ,
-    'background':'#0a58ca',
-    "color":'azure',
-
-
-
 
 }
 
