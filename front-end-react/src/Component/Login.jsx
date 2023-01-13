@@ -1,16 +1,17 @@
 import React from 'react'
 import "../App.css";
-import log from '../prf.png'
+import loginimg from '../loginimg.gif'
 
 
 const Login = () => {
   return (
     <>
-        <div className="login py-4 bg-light">
+      <div className="h-100 bg-white">
+      <div className="login py-4">
           <div className='container'>
             <div className='row rowlog g-0'>
               <div className='col-5'>
-                  <img src={log} className="img-fluid " style={{"height": "100%","width": "100%"}}></img>
+                  <img src={loginimg} className="img-fluid " style={{"height": "100%","width": "100%"}}></img>
               </div>
               <div className='col-7  py-5 '>
                     <form className='text-center' >
@@ -29,6 +30,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+     </div>
     </>
   )
 }

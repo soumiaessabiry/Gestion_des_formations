@@ -4,6 +4,7 @@ import Dashbord from '../src/Component/Admin/DashbordAdmin'
 import Employee from '../src/Component/Admin/Employees'
 import Formation from '../src/Component/Admin/Formation'
 import Organisme from '../src/Component/Admin/Organismes'
+import PageError from '../src/Component/404'
 import './App.css';
 const myStyle = {
   height: "100vh",
@@ -19,6 +20,7 @@ function App() {
             <Route path="/Employee" element={<Employee/>} />
             <Route path="/Formation" element={<Formation/>} />
             <Route path="/Organisme" element={<Organisme/>} />
+            <Route path="/PageError" element={<PageError/>} />
           </Routes>
        </BrowserRouter>
     
