@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import {useState} from "react";
-import {Modal, Button} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
 const icon={"fontSize": "35px","color":"brown"}
@@ -66,38 +66,38 @@ const Employee=()=>{
         <Modal.Header closeButton>
         <Modal.Title>Ajouter Employee</Modal.Title>
         </Modal.Header>
-    <Modal.Body>
-        <form >
-            <div className="mb-3">
-                <label className="col-form-label fs-6">last name</label>
-                <input type="text" className="form-control p-2 fs-4" />
+        <Modal.Body>
+            <form >
+                <div className="mb-3">
+                    <label className="col-form-label fs-6">last name</label>
+                    <input type="text" className="form-control p-2 fs-4" />
+                </div>
+                <div className="mb-3">
+                    <label className="col-form-label fs-6">first name</label>
+                    <input type="text" className="form-control p-2 fs-4" />
+                </div>
+                <div className="mb-3">
+                    <label  className="col-form-label fs-6">Email  </label>
+                    <input type="email" className="form-control p-2 fs-4"  />
+                </div>
+                <div className="mb-3">
+                    <label  className="col-form-label fs-6">Phone  </label>
+                    <input type="number" className="form-control p-2 fs-4"  />
+                </div>
+                <div className="mb-3">
+                    <label  className="col-form-label fs-6">Organisme</label>
+                    <input type="text" className="form-control p-2 fs-4"  />
+                </div>
+                <div className="mb-3">
+                    <label  className="col-form-label fs-6">Password </label>
+                    <input type="password" className="form-control p-2 fs-4"  />
+                </div>
+                <div className="modal-footer ">
+                <button type="button" className="btn btn-secondary fw-bolder p-3" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
+                <button type="submit" className="btn p-3 fw-bolder text-white"  name="submit"  style={bgg} >Ajouter employee </button>
             </div>
-            <div className="mb-3">
-                <label className="col-form-label fs-6">first name</label>
-                <input type="text" className="form-control p-2 fs-4" />
-            </div>
-            <div className="mb-3">
-                <label  className="col-form-label fs-6">Email  </label>
-                <input type="email" className="form-control p-2 fs-4"  />
-            </div>
-            <div className="mb-3">
-                <label  className="col-form-label fs-6">Phone  </label>
-                <input type="number" className="form-control p-2 fs-4"  />
-            </div>
-            <div className="mb-3">
-                <label  className="col-form-label fs-6">Organisme</label>
-                <input type="text" className="form-control p-2 fs-4"  />
-            </div>
-            <div className="mb-3">
-                <label  className="col-form-label fs-6">Password </label>
-                <input type="password" className="form-control p-2 fs-4"  />
-            </div>
-            <div className="modal-footer ">
-            <button type="button" className="btn btn-secondary fw-bolder p-3" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
-            <button type="submit" className="btn p-3 fw-bolder text-white"  name="submit"  style={bgg} >Ajouter employee </button>
-        </div>
-        </form>
-    </Modal.Body>
+            </form>
+        </Modal.Body>
 </Modal>
      </div>
     )
