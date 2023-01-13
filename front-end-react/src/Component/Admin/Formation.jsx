@@ -94,7 +94,7 @@ const Formation=()=>{
     
                 <div className="modal-footer ">
                 <button type="button" className="btn btn-secondary fw-bolder p-3" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
-                <button type="submit" className="btn p-3 fw-bolder text-white"  name="submit"  style={bgg} >Ajouter employee </button>
+                <button type="submit" className="btn p-3 fw-bolder text-white"  name="submit"  style={bgg} >Ajouter Formation </button>
             </div>
             </form>
         </Modal.Body>
