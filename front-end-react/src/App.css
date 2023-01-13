@@ -5,12 +5,12 @@
     font-family:cursive;
     
 }
-.row{
+.rowlog{
     border-radius: 30px;
     box-shadow: 12px 12px 22px;
 
 }
-.title{
+.titlelog{
     color:blue;
     margin-bottom: 23px;
     font-weight:bolder;
@@ -56,3 +56,13 @@ label{
     background-color: blue;
     color: azure;
 } 
+.navlik2{
+    border: none ;
+    background-color:#0a58ca;
+    color:azure;
+    
+
+
+
+
+}

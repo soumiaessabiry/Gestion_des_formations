@@ -8,13 +8,13 @@ const Login = () => {
     <>
         <div className="login py-4 bg-light">
           <div className='container'>
-            <div className='row g-0'>
+            <div className='row rowlog g-0'>
               <div className='col-5'>
                   <img src={log} className="img-fluid " style={{"height": "100%","width": "100%"}}></img>
               </div>
               <div className='col-7  py-5 '>
                     <form className='text-center' >
-                    <h1 className='title'>Login</h1>
+                    <h1 className='titlelog'>Login</h1>
                       <div className='mb-4'>
                           <input type="email" name='email' className='inp px-4 ms-2' placeholder='email' />
                       </div>                            
