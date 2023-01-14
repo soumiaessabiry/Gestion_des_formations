@@ -28,20 +28,20 @@ const Sidebar=(props)=>{
                 <div className="d-grid gap-2 "  style={sid}>
                     <div >
                         <div  className="mt-5 pdashbor">
-                            <NavLink to={props.NavLink1} style={navlik}>
+                            <NavLink to="/Formation" style={navlik}>
                                 <span>{props.iconNavLink1}</span>
                                 <p className="fw-bolder fs-5 title"  style={{display: isShown ? 'block' : 'none'}} >{props.NavLink1}</p>
                             </NavLink>
                         </div>
                         <div  className=" pdashbor mt-5">
-                            <NavLink to={props.NavLink2}  style={navlik}>
+                            <NavLink to="/Employee"  style={navlik}>
                                 <span>{props.iconNavLink2}</span>
                                  <p className="fw-bolder fs-5 title" style={{display: isShown ? 'block' : 'none'}}>{props.NavLink2}</p>
 
                             </NavLink>
                         </div>
                         <div  className="mt-5 pdashbor">
-                            <NavLink to={props.NavLink3}  style={navlik}>
+                            <NavLink to="/Organisme"  style={navlik}>
                                 <span>{props.iconNavLink3}</span>
                                 <p className="fw-bolder fs-5 title" style={{display: isShown ? 'block' : 'none'}}>{props.NavLink3}</p>
                             </NavLink>

@@ -1,5 +1,6 @@
 import React from 'react'
-import img2 from '../404img1.gif'
+import img2 from '../image/404img1.gif'
+
 
 const style={
 }
