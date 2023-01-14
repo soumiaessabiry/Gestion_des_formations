@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {BsFillArrowRightCircleFill} from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const styleFc={ 'marginTop':' 15px','marginleft':'-15px', 'fontWeight': 'bolder','fontSize':'40px','color':'azure'}
 const sid={'marginTop':"90px"}
@@ -11,9 +13,24 @@ const navlik={
 }
 
 const Sidebar=(props)=>{
+    const baseurl="http://localhost:4166/api/auth/Logout"
+    const navigate=useNavigate()
     const [isShown, setDisplay]=useState('true');
     const Titledispshow=(e)=>{
         setDisplay(!isShown)
+    }
+    const Logout=async()=>{
+       await axios.get(baseurl)
+        .then((Response)=>{
+            localStorage.clear();
+            window.location.replace("/login")
+
+        })
+        .catch((error)=>{
+            console.log(error)
+
+        })
+        
     }
     return(
         <div className="position-relative p-2">
@@ -47,10 +64,10 @@ const Sidebar=(props)=>{
                             </NavLink>
                         </div>
                         <div  className="mt-5 pdashbor">
-                            {/* <NavLink to={props.logout}  style={navlik}> */}
+                            <button  className="btn " style={navlik} onClick={Logout}>
                                 <span>{props.iconlogout}</span>
                                 <p className="fw-bolder fs-5 title navlik2"  style={{display: isShown ? 'block' : 'none'}}>{props.logout}</p>
-                            {/* </NavLink> */}
+                            </button>
                         </div>
                     </div>
                 </div>
