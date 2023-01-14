@@ -6,6 +6,7 @@ import Formation from '../src/Component/Admin/Formation'
 import Organisme from '../src/Component/Admin/Organismes'
 import PageError from '../src/Component/404'
 import PrivateRoutAdmin from "../src/Component/PrivateRoute/PrivateRoutAdmin"
+import PrivateRouteEmploye from "../src/Component/PrivateRoute/PrivateRouteEmploye"
 import './App.css';
 const myStyle = {
   height: "100vh",
@@ -25,10 +26,12 @@ function App() {
                 <Route path="/Dashbord" element={<Dashbord />} />
                 <Route path="/Employee" element={<Employee/>} />
                 <Route path="/Formation" element={<Formation/>} />
-                <Route path="/Organisme" element={<Organisme/>} />
             </Route>
             
             {/*employee route */}
+            <Route element={<PrivateRouteEmploye/>}>
+              <Route path="/Organisme" element={<Organisme/>} />
+            </Route>
 
           </Routes>
        </BrowserRouter>

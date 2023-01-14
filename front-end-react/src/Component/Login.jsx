@@ -28,7 +28,7 @@ const Login =() => {
             if(DecodToken){
               localStorage.setItem("token",response.data.token)
               if(DecodToken.Role==="Admin")navigate('/Dashbord')
-              else navigate('/PageError')
+              else navigate('/Organisme')
             }
             seterrorApi(response.data)
           })
