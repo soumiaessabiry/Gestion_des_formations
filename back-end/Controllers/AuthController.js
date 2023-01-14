@@ -20,7 +20,6 @@ const Login=async(req,res)=>{
         if(compar_password){
             const token=jwt.sign({_id:Check_User._id,email:Check_User.email,Role:Check_User.Role,First_name:Check_User.First_name},SECRET)
             ls.set("token",token)
-            // res.status(200).json({msg:"Welcom"+Check_User.First_name+Check_User.Last_name})
             res.status(200).json({token})
         }else{
             throw Error(" Sorry Password is Inccorect ")

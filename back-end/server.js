@@ -6,13 +6,15 @@ const bodyparser=require("body-parser")
 const multer=require ('multer') 
 const db=require("./Config/database")
 const path = require('path')
+var cors = require('cors')
+
 
 
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,"images")))
-
+app.use(cors()) 
 const Auth=require('./Routes/AuthRoute')
 const formationRoute=require('./Routes/AdminRouter/FormationRoute')
 const organismeRoute=require('./Routes/AdminRouter/OrganismRoute')
