@@ -80,10 +80,25 @@ const AllEmployee=async(req,res)=>{
     }
 }
 
+const UpdateEmployee=async(req,res)=>{
+    const updatemploye=await userModel.findOneAndUpdate({_id:req.params.id},{$set:{
+        First_name:req.body.First_name,
+        Last_name:req.body.Last_name,
+        email:req.body.email,
+        phone:req.body.phone,
+        id_organisme:req.body.id_organisme,
+    }})
+    if(updatemploye){
+        res.status(201).json(updatemploye)
+    }else{
+        throw Error("Error to update employee")
+    }
 
+}
 module.exports={
     Login,
     AjouterEmployee,
     Logout,
-    AllEmployee
+    AllEmployee,
+    UpdateEmployee
 }

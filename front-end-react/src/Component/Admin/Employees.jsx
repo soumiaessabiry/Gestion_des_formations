@@ -1,6 +1,8 @@
 import { FcReading,FcConferenceCall,FcDepartment} from "react-icons/fc";
 import { HiOutlineLogout} from "react-icons/hi";
 import { BsPersonPlusFill} from "react-icons/bs";
+import { AiFillEdit} from "react-icons/ai";
+import { RiDeleteBin2Fill} from "react-icons/ri";
 import Sidebar from "../sidebar";
 import Navbar from "../Navbar";
 import Table from 'react-bootstrap/Table';
@@ -18,6 +20,7 @@ const Employee=()=>{
     const baseUrl1="http://localhost:4166/api/organisme/AfficherOrganismes"
     const baseUrl2="http://localhost:4166/api/user/Ajouteremployee"
     const baseUrl3="http://localhost:4166/api/user/AllEmployee"
+    const baseUrl4="http://localhost:4166/api/user/AllEmployee"
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -31,7 +34,6 @@ const Employee=()=>{
         })
         .catch((error)=>{
             console.log(error)
-
         })
     }
     //? *****Add employee****
@@ -59,8 +61,6 @@ const Employee=()=>{
         .catch((err)=>{
             console.log(err)
         })
-
-       
     }
     //! *****Afficher all Employee***
     const[Employee,setEmployee]=useState([])
@@ -75,6 +75,7 @@ const Employee=()=>{
             })
 
         }
+
     useEffect(()=>{
         AllOrganismes()
         AllEmployee()
@@ -112,7 +113,6 @@ const Employee=()=>{
                             <th >phone</th>
                             <th >Organisme</th>
                             <th >Option</th>
-                        
                         </tr>
                     </thead>
                     <tbody>
@@ -124,9 +124,12 @@ const Employee=()=>{
                           <td>{e.phone}</td>
                           <td>{e.id_organisme}</td>
                           <td>
-                            <td>updat</td>
-                            <td>   </td>
-                            <td>delet</td>
+                          <td style={{display:"flex"}}>
+                          {/* onClick={() => setData(e)}  */}
+                          {/* onClick={()=>{ if (window.confirm('Are you sure you wish to delete this Command  ?')) DeletId(e._id)}} */}
+                            <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success"/></button>
+                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "/></button> 
+                          </td>
                           </td>
                           </tr>
                       ))}
