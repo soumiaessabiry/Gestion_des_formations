@@ -208,7 +208,7 @@ return(
                 </div>
                 <div className="mb-3">
                     <label className="col-form-label fs-6">Image</label>
-                    <input type="file"  name="image" value={image} onChange={(e)=>{setimage(e.target.files[0])}} className="form-control p-2 fs-4" />
+                    <input type="file"  name="image" onChange={(e)=>{setimage(e.target.files[0])}} className="form-control p-2 fs-4" />
                 </div>
                 <div className="mb-3">
                     <label  className="col-form-label fs-6">Date debut  </label>

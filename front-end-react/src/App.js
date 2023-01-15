@@ -31,11 +31,12 @@ function App() {
                 <Route path="/Dashbord" element={<Dashbord />} />
                 <Route path="/Employee" element={<Employee/>} />
                 <Route path="/Formation" element={<Formation/>} />
+                <Route path="/Organisme" element={<Organisme/>} />
+
             </Route>
             
             {/*employee route */}
             <Route element={<PrivateRouteEmploye/>}>
-              <Route path="/Organisme" element={<Organisme/>} />
             </Route>
 
           </Routes>
