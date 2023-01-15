@@ -31,10 +31,10 @@ const Ajouterformation=async(req,res)=>{
 
 }
 const UpdateFormation=async(req,res)=>{
-    const {error}=validation_formation(req.body)
-    if(error){
-        return res.json({error:error.details[0].message})
-    }    
+    // const {error}=validation_formation(req.body)
+    // if(error){
+    //     return res.json({error:error.details[0].message})
+    // }    
     const update_formation=await formationModel.findOneAndUpdate({_id:req.params.id},{
         $set:{
             Name_Formation:req.body.Name_Formation,
