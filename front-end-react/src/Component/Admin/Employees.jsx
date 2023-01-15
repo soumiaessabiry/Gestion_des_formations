@@ -17,10 +17,13 @@ const iconBsP={"fontSize": "35px"}
 const Employee=()=>{
     const baseUrl1="http://localhost:4166/api/organisme/AfficherOrganismes"
     const baseUrl2="http://localhost:4166/api/user/Ajouteremployee"
+    const baseUrl3="http://localhost:4166/api/user/AllEmployee"
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const[Organisme,setOrganisme]=useState([])
+
+    //! ****Afficher organisme pour select****
     const AllOrganismes=async()=>{
         await axios.get(baseUrl1)
         .then((Response)=>{
@@ -31,7 +34,7 @@ const Employee=()=>{
 
         })
     }
-  
+    //? *****Add employee****
     const [First_name,setFirstname]=useState('')
     const [Last_name,setLastname]=useState('')
     const [email,setemail]=useState('')
@@ -46,10 +49,8 @@ const Employee=()=>{
         password,
         id_organisme
     }
-    const[Employee,setEmployee]=useState([])
     const AddEmployee=async(e)=>{
         e.preventDefault()
-        // console.log(dataemploye)
         await axios.post(baseUrl2,dataemploye)
         .then((Response)=>{
             toast.success('Add users success')
@@ -61,8 +62,22 @@ const Employee=()=>{
 
        
     }
+    //! *****Afficher all Employee***
+    const[Employee,setEmployee]=useState([])
+        const AllEmployee=async()=>{
+            await axios.get(baseUrl3)
+           .then((Response)=>{
+            setEmployee(Response.data)
+            console.log(Employee)
+           })
+            .catch((err)=>{
+                console.log(err)
+            })
+
+        }
     useEffect(()=>{
         AllOrganismes()
+        AllEmployee()
     },[])
     
     return(
@@ -101,8 +116,20 @@ const Employee=()=>{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        </tr>
+                      {Employee.map((e)=>(
+                          <tr key={e._id}>
+                          <td>{e.First_name}</td>
+                          <td>{e.Last_name}</td>
+                          <td>{e.email}</td>
+                          <td>{e.phone}</td>
+                          <td>{e.id_organisme}</td>
+                          <td>
+                            <td>updat</td>
+                            <td>   </td>
+                            <td>delet</td>
+                          </td>
+                          </tr>
+                      ))}
                     </tbody>
                 </Table>
              </div>

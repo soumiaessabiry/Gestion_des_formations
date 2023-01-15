@@ -71,11 +71,19 @@ const Logout=(req,res)=>{
 
     }
 }
-
+const AllEmployee=async(req,res)=>{
+    const allemployee=await userModel.find()
+    if(allemployee.length==0){
+        throw Error("Soryy collection users Vide")
+    }else{
+        res.status(201).json(allemployee)
+    }
+}
 
 
 module.exports={
     Login,
     AjouterEmployee,
-    Logout
+    Logout,
+    AllEmployee
 }
