@@ -94,7 +94,7 @@ const Employee=()=>{
         e.preventDefault()
         axios.put(baseUrl4,dataupdate)
         .then((Response)=>{
-            toast.success('updat user  success')
+            toast.loading('updat user  success')
             window.location.reload(false); 
         })
         .cath((err)=>{
@@ -105,7 +105,7 @@ const Employee=()=>{
 const DeletEmploye=async(id)=>{
     axios.delete(`http://localhost:4166/api/user/Deletemploye/${id}`)
     .then((Response)=>{
-            toast.success('delet success')
+            toast.loading('delet success')
             window.location.reload(false);
     })
     .catch((err)=>{
@@ -164,7 +164,7 @@ useEffect(()=>{
                           <td>
                           <td style={{display:"flex"}}>
                           <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success"onClick={() =>setemployedata(e)}  /></button>
-                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this Command  ?')) DeletEmploye(e._id)}}/></button> 
+                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this employee  ?')) DeletEmploye(e._id)}}/></button> 
                           </td>
                           </td>
                           </tr>

@@ -49,7 +49,7 @@ const Formation=()=>{
     }
 //!Afficher formation 
 const AllFormations=async()=>{
-    axios.get(baseUrl2)
+    await axios.get(baseUrl2)
     .then((Response)=>{
         setAllformations(Response.data.All_formations)
     })
@@ -74,13 +74,27 @@ formationdataupdate.append('Date_Fin', Date_Fin)
 formationdataupdate.append('Desciption',Desciption)
 const UpdateFormation=async(e)=>{
     e.preventDefault()
-    axios.put(`http://localhost:4166/api/formation/Updateformation/${id_formation}`,formationdataupdate)
+     await axios.put(`http://localhost:4166/api/formation/Updateformation/${id_formation}`,formationdataupdate)
     .then((Response)=>{
-        toast.success('Upadate formation avec success')
-        window.location.reload(false);    })
+        toast.loading('Upadate formation avec success')
+        window.location.reload(false);    
+    })
     .catch((err)=>{
         console.log(err)
     })
+}
+
+//! delet formation 
+const DeletFormation=async(id)=>{
+     axios.delete(`http://localhost:4166/api/formation/Deletformation/${id}`)
+    .then((Response)=>{
+        toast.loading('delet formation avec success')
+        window.location.reload(false);   
+     })
+    .catch((err)=>{
+        console.log(err)
+    })
+
 }
 useEffect(()=>{
     AllFormations()
@@ -133,7 +147,7 @@ return(
                         <td>{e.Desciption}</td>
                         <td className="" style={{display:"flex",padding: "1.5rem 0.5rem"}}>
                             <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{setformationdata(e)}} ><AiFillEdit className="fs-3 text-success" /></button>
-                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " /></button> 
+                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this formaion  ?')) DeletFormation(e._id)}}/></button> 
                         </td>
                         </tr>
                     ))}                    
@@ -194,7 +208,7 @@ return(
                 </div>
                 <div className="mb-3">
                     <label className="col-form-label fs-6">Image</label>
-                    <input type="file"  name="image" value={""} onChange={(e)=>{setimage(e.target.files[0])}} className="form-control p-2 fs-4" />
+                    <input type="file"  name="image" value={image} onChange={(e)=>{setimage(e.target.files[0])}} className="form-control p-2 fs-4" />
                 </div>
                 <div className="mb-3">
                     <label  className="col-form-label fs-6">Date debut  </label>
