@@ -31,10 +31,10 @@ const Login=async(req,res)=>{
 
 
 const AjouterEmployee=async(req,res)=>{
-    const {error}=validation_user(req.body)
-    if(error){
-        return res.json({error:error.details[0].message})
-    }
+    // const {error}=validation_user(req.body)
+    // if(error){
+    //     return res.json({error:error.details[0].message})
+    // }
     let email_user=req.body.email
     let password=req.body.password
     let id_organisme=req.body.id_organisme

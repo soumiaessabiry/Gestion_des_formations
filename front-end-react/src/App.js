@@ -8,6 +8,10 @@ import PageError from '../src/Component/404'
 import PrivateRoutAdmin from "../src/Component/PrivateRoute/PrivateRoutAdmin"
 import PrivateRouteEmploye from "../src/Component/PrivateRoute/PrivateRouteEmploye"
 import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+
 const myStyle = {
   height: "100vh",
   overflow: "hidden",
@@ -15,6 +19,7 @@ const myStyle = {
 function App() {
   return (
     <div style={myStyle} className="main">
+        <ToastContainer />
        <BrowserRouter>
           <Routes>
             {/*public route */}
@@ -35,7 +40,7 @@ function App() {
 
           </Routes>
        </BrowserRouter>
-    
+
     </div>
   );
 }

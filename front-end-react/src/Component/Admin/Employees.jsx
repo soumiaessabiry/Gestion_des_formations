@@ -5,16 +5,65 @@ import Sidebar from "../sidebar";
 import Navbar from "../Navbar";
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {Modal} from 'react-bootstrap';
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+
 const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
 const icon={"fontSize": "35px","color":"brown"}
 const iconBsP={"fontSize": "35px"}
 const Employee=()=>{
+    const baseUrl1="http://localhost:4166/api/organisme/AfficherOrganismes"
+    const baseUrl2="http://localhost:4166/api/user/Ajouteremployee"
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const[Organisme,setOrganisme]=useState([])
+    const AllOrganismes=async()=>{
+        await axios.get(baseUrl1)
+        .then((Response)=>{
+            setOrganisme(Response.data.Organismes)
+        })
+        .catch((error)=>{
+            console.log(error)
+
+        })
+    }
+  
+    const [First_name,setFirstname]=useState('')
+    const [Last_name,setLastname]=useState('')
+    const [email,setemail]=useState('')
+    const [phone,setphone]=useState('')
+    const [password,setpassword]=useState('')
+    const [id_organisme,setidorganisme]=useState('')
+    const dataemploye={
+        First_name,
+        Last_name,
+        email,
+        phone,
+        password,
+        id_organisme
+    }
+    const[Employee,setEmployee]=useState([])
+    const AddEmployee=async(e)=>{
+        e.preventDefault()
+        // console.log(dataemploye)
+        await axios.post(baseUrl2,dataemploye)
+        .then((Response)=>{
+            toast.success('Add users success')
+            window.location.reload(false); 
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+       
+    }
+    useEffect(()=>{
+        AllOrganismes()
+    },[])
     
     return(
      <div className="h-100 bg-white">
@@ -34,6 +83,7 @@ const Employee=()=>{
         <div className=" p-1 w-100" style={over} >
             <Row className=" m-auto" style={bgg}>
                    <Navbar  handleShow={handleShow} iconBsP={iconBsP}  />
+
             </Row>
           <Row className="  m-auto mt-3 bg-light text-dark ">
             <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -52,7 +102,6 @@ const Employee=()=>{
                     </thead>
                     <tbody>
                         <tr>
-                        
                         </tr>
                     </tbody>
                 </Table>
@@ -67,30 +116,35 @@ const Employee=()=>{
         <Modal.Title>Ajouter Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <form >
-                <div className="mb-3">
-                    <label className="col-form-label fs-6">last name</label>
-                    <input type="text" className="form-control p-2 fs-4" />
-                </div>
+            <form method="POST" onSubmit={AddEmployee}>
                 <div className="mb-3">
                     <label className="col-form-label fs-6">first name</label>
-                    <input type="text" className="form-control p-2 fs-4" />
+                    <input type="text" name="First_name" className="form-control p-2 fs-4" onChange={(e)=>{setFirstname(e.target.value)}} />
                 </div>
                 <div className="mb-3">
+                    <label className="col-form-label fs-6">last name</label>
+                    <input type="text" name="Last_name" className="form-control p-2 fs-4" onChange={(e)=>{setLastname(e.target.value)}} />
+                </div>
+               
+                <div className="mb-3">
                     <label  className="col-form-label fs-6">Email  </label>
-                    <input type="email" className="form-control p-2 fs-4"  />
+                    <input type="email" name="email" className="form-control p-2 fs-4" onChange={(e)=>{setemail(e.target.value)}}  />
                 </div>
                 <div className="mb-3">
                     <label  className="col-form-label fs-6">Phone  </label>
-                    <input type="number" className="form-control p-2 fs-4"  />
+                    <input type="number"name="phone" className="form-control p-2 fs-4" onChange={(e)=>{setphone(e.target.value)}} />
                 </div>
                 <div className="mb-3">
-                    <label  className="col-form-label fs-6">Organisme</label>
-                    <input type="text" className="form-control p-2 fs-4"  />
+                <label  className="col-form-label fs-6">Organisme</label><br/>
+                <select className="form-select form-select-lg mb-3" onChange={(e)=>{setidorganisme(e.target.value)}}>
+                    {Organisme.map((e) => (
+                    <option  value={e._id}>{e.name_organisme}</option>
+                    ))}
+                </select>
                 </div>
                 <div className="mb-3">
                     <label  className="col-form-label fs-6">Password </label>
-                    <input type="password" className="form-control p-2 fs-4"  />
+                    <input type="password" name="password" className="form-control p-2 fs-4" onChange={(e)=>{setpassword(e.target.value)}} />
                 </div>
                 <div className="modal-footer ">
                 <button type="button" className="btn btn-secondary fw-bolder p-3" data-bs-dismiss="modal" onClick={handleClose}>Close</button>
@@ -99,6 +153,8 @@ const Employee=()=>{
             </form>
         </Modal.Body>
 </Modal>
+<ToastContainer/>
+
      </div>
     )
 
