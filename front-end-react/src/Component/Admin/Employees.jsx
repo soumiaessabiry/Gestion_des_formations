@@ -76,7 +76,8 @@ const Employee=()=>{
             })
 
         }
-    //? ******updat employee 
+
+//? ******updat employee*****
     const setemployedata = (e) => {
         setidemploye(e._id)
         setFirstname(e.First_name)
@@ -84,7 +85,6 @@ const Employee=()=>{
         setemail(e.email)
         setphone(e.phone)
         setidorganisme(e.id_organisme)
-     
     }
     const dataupdate={
         First_name,
@@ -95,7 +95,6 @@ const Employee=()=>{
     }
     const UpdatEmploye=async(e)=>{
         e.preventDefault()
-
         axios.put(baseUrl4,dataupdate)
         .then((Response)=>{
             toast.success('updat user  success')
@@ -105,6 +104,19 @@ const Employee=()=>{
             console.log(err)
         })
     }
+//!delet employee 
+const DeletEmploye=async(id)=>{
+    axios.delete(`http://localhost:4166/api/user/Deletemploye/${id}`)
+    .then((Response)=>{
+            toast.success('delet success')
+            window.location.reload(false);
+        
+    })
+    .catch((err)=>{
+        console.log(err)
+
+    })
+}
     useEffect(()=>{
         AllOrganismes()
         AllEmployee()
@@ -157,8 +169,8 @@ const Employee=()=>{
                           <td>{e.id_organisme}</td>
                           <td>
                           <td style={{display:"flex"}}>
-                          <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success"onClick={() => setemployedata(e)}  /></button>
-                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "/></button> 
+                          <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success"onClick={() =>setemployedata(e)}  /></button>
+                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this Command  ?')) DeletEmploye(e._id)}}/></button> 
                           </td>
                           </td>
                           </tr>

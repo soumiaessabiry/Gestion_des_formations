@@ -97,10 +97,19 @@ const UpdateEmployee=async(req,res)=>{
     }
 
 }
+const Deletemploye=async(req,res)=>{
+    const deletemploye=await userModel.findOneAndRemove({_id:req.params.id})
+    if (deletemploye) {
+        res.status(200).json({msg:"Success delete Employee"})
+    } else {
+        throw error("error to delet employee")
+    }
+}
 module.exports={
     Login,
     AjouterEmployee,
     Logout,
     AllEmployee,
-    UpdateEmployee
+    UpdateEmployee,
+    Deletemploye
 }
