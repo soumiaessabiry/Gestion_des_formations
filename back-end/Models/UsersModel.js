@@ -32,7 +32,7 @@ const UsersSchema = new mongoose.Schema({
   },
   Role: {
     type:String,
-    default:'employee',
+    default:'employe',
     trim:true
 
 

@@ -72,11 +72,13 @@ const Logout=(req,res)=>{
     }
 }
 const AllEmployee=async(req,res)=>{
-    const allemployee=await userModel.find()
+    let employe="employe"
+    const allemployee=await userModel.find({Role:employe})
     if(allemployee.length==0){
         throw Error("Soryy collection users Vide")
     }else{
         res.status(201).json(allemployee)
+
     }
 }
 
