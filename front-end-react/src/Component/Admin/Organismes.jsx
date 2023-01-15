@@ -1,6 +1,7 @@
 import { FcReading,FcConferenceCall,FcDepartment} from "react-icons/fc";
 import { HiOutlineLogout} from "react-icons/hi";
-import { BsPersonPlusFill} from "react-icons/bs";
+import { RiDeleteBin2Fill} from "react-icons/ri";
+import { AiFillEdit} from "react-icons/ai";
 import Sidebar from "../sidebar";
 import Navbar from "../Navbar";
 import Table from 'react-bootstrap/Table';
@@ -9,6 +10,7 @@ import {useState} from "react";
 import {Modal} from 'react-bootstrap';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useEffect } from "react";
 
 const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
@@ -21,12 +23,14 @@ const Organisme=()=>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const baseurl1="http://localhost:4166/api/organisme/Ajouterorganisme"
+    const baseurl2="http://localhost:4166/api/organisme/AfficherOrganismes"
     const[id_organisme,setidOrganisme]=useState("")
     const[name_organisme,setOrganisme]=useState("")
     const[ville,setville]=useState("")
     const[Address,setAddress]=useState("")
     const[phone,setphone]=useState("")
     const[Errorvalid,setErrorvalid]=useState("")
+    const[Allorganismes,setAllorganisme]=useState([])
     const dataorganisme={
         name_organisme,
         ville,
@@ -48,9 +52,20 @@ const AjouterOrganisme=async(e)=>{
     .catch((err)=>{
         setErrorvalid(err)  
     })
-
-
 }
+//?Affichage organsime
+ const AllOrganismes=async()=>{
+    await axios.get(baseurl2)
+    .then((Response)=>{
+            setAllorganisme(Response.data.Organismes) 
+     })
+    .catch((err)=>{
+        setErrorvalid(err)  
+    })
+ }
+useEffect(()=>{
+    AllOrganismes()
+},[]) 
 
 return(
     <div className="h-100 bg-white">
@@ -89,9 +104,22 @@ return(
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    
-                    </tr>
+                   {
+                    (Allorganismes.length===0)?
+                    <tr><span style={err}>sorry vous avez pas des organimse</span></tr>:
+                    Allorganismes.map((e)=>(
+                        <tr key={e._id}>
+                            <td>{e.name_organisme}</td>
+                            <td>{e.ville}</td>
+                            <td>{e.Address}</td>
+                            <td>{e.phone}</td>  
+                            <td className="" style={{display:"flex",padding: "1.5rem 0.5rem"}}>
+                                <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" ><AiFillEdit className="fs-3 text-success" /></button>
+                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "/></button> 
+                        </td>                       
+                        </tr>
+                    ))
+                   }
                 </tbody>
             </Table>
             </div>
