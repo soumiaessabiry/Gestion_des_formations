@@ -7,7 +7,7 @@ const errorHandller=require("../../middlewares/ErrorHandler")
 const multer=require("multer")
 const verifyToken=require("../../middlewares/VerifeyToken")
 const AdminMiddleware=require("../../middlewares/AdminMiddleware")
-
+const fs= require("fs")
 router.post('/AjouterFormation',[verifyToken,AdminMiddleware],upload.single('image'),CatchError(Ajouterformation))
 router.put('/Updateformation/:id',[verifyToken,AdminMiddleware],upload.single('image'),CatchError(UpdateFormation))
 router.delete('/Deletformation/:id',[verifyToken,AdminMiddleware],CatchError(DeletFormation))

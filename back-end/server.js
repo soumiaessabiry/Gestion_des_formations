@@ -12,7 +12,8 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname,"images")))
+// app.use(express.static(path.join(__dirname,"images")))
+app.use('/public',express.static('public'))
 
 const Auth=require('./Routes/AuthRoute')
 const formationRoute=require('./Routes/AdminRouter/FormationRoute')

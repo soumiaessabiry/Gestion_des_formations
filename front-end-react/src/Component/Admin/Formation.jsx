@@ -101,16 +101,16 @@ return(
                           <tr key={e._id}>
                           <td>{e.Name_Formation}</td>
                           <td>
-                          <img width="30" height="30" src={e.image}  />
+
+                          <img width="80" height="70" src={`http://localhost:4166/public/${e.image}`}  />
                           </td>
                           <td>{e.Date_debut}</td>
                           <td>{e.Date_Fin}</td>
                           <td>{e.Desciption}</td>
-                          <td style={{display:"flex"}}>
-                          <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success" /></button>
-                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " /></button> 
+                          <td className="" style={{display:"flex",padding: "1.5rem 0.5rem"}}>
+                                  <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success" /></button>
+                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " /></button> 
                           </td>
-                         
                           </tr>
                       ))}                    
                       </tbody>
