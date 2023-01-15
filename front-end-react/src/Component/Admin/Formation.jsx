@@ -1,14 +1,15 @@
 import { FcReading,FcConferenceCall,FcDepartment} from "react-icons/fc";
 import { HiOutlineLogout} from "react-icons/hi";
+import { RiDeleteBin2Fill} from "react-icons/ri";
+import { AiFillEdit} from "react-icons/ai";
 import Sidebar from "../sidebar";
 import Navbar from "../Navbar";
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
-import {useState} from "react";
+import {useState ,useEffect} from "react";
 import axios from "axios";
 import {Modal} from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
-
 
 const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
@@ -19,29 +20,47 @@ const Formation=()=>{
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const baseUrl="http://localhost:4166/api/formation/AjouterFormation"
+    const baseUrl1="http://localhost:4166/api/formation/AjouterFormation"
+    const baseUrl2="http://localhost:4166/api/formation/Afficheformations"
     const [Name_Formation,setFormation]=useState("")
     const [image,setimage]=useState("")
     const [Date_debut,setDatedebut]=useState("")
     const [Date_Fin,setDateFin]=useState("")
     const [Desciption,setDesciption]=useState("")
+    const [Allformations,setAllformations]=useState([])
     const formData = new FormData();
         formData.append('Name_Formation',Name_Formation)
         formData.append('image', image)
         formData.append('Date_debut',Date_debut)
         formData.append('Date_Fin', Date_Fin)
         formData.append('Desciption',Desciption)
-        const AjouterFormation=async(e)=>{
-            e.preventDefault()
-            await axios.post(baseUrl,formData)
-            .then((Response)=>{
-                toast.success('Ajouter formation avec success')
-                window.location.reload(false);
-            })
-            .cath((err)=>{
-                console.log(err)
-            })
-        }
+//!Ajouter formation 
+    const AjouterFormation=async(e)=>{
+        e.preventDefault()
+        await axios.post(baseUrl1,formData)
+        .then((Response)=>{
+            toast.success('Ajouter formation avec success')
+            window.location.reload(false);
+        })
+        .cath((err)=>{
+            console.log(err)
+        })
+    }
+//!Afficher formation 
+
+const AllFormations=async()=>{
+    axios.get(baseUrl2)
+    .then((Response)=>{
+        setAllformations(Response.data.All_formations)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
+useEffect(()=>{
+    AllFormations()
+},[])
 
 return(
     <div className="h-100 bg-white">
@@ -78,10 +97,23 @@ return(
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        
-                        </tr>
-                    </tbody>
+                    {Allformations.map((e)=>(
+                          <tr key={e._id}>
+                          <td>{e.Name_Formation}</td>
+                          <td>
+                          <img width="30" height="30" src={e.image}  />
+                          </td>
+                          <td>{e.Date_debut}</td>
+                          <td>{e.Date_Fin}</td>
+                          <td>{e.Desciption}</td>
+                          <td style={{display:"flex"}}>
+                          <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success" /></button>
+                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " /></button> 
+                          </td>
+                         
+                          </tr>
+                      ))}                    
+                      </tbody>
                 </Table>
                 </div>
             </div>
