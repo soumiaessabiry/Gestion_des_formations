@@ -44,11 +44,11 @@ const AjouterOrganisme=async(e)=>{
     e.preventDefault()
     await axios.post(baseurl1,dataorganisme)
     .then((Response)=>{
-        if(Response.data.error){
-            setErrorapi(Response.data.error)  
-        }else{
+        if(Response.data.Organisme){
             toast.success('Ajouter Organisme avec success')
-            window.location.reload(false); 
+            window.location.reload(false)
+        }else{
+            setErrorvalid(Response.data.error)
         }
      })
     .catch((err)=>{
@@ -146,10 +146,7 @@ return(
                     </tr>
                 </thead>
                 <tbody>
-                   {
-                    (Allorganismes.length===0)?
-                    <tr><span style={err}>sorry vous avez pas des organimse</span></tr>:
-                    Allorganismes.map((e)=>(
+                   {Allorganismes.map((e)=>(
                         <tr key={e._id}>
                             <td>{e.name_organisme}</td>
                             <td>{e.ville}</td>
