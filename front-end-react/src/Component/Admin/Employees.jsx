@@ -140,6 +140,7 @@ useEffect(()=>{
               NavLink1="Formation"
               NavLink2="Employee"
               NavLink3="Organisme"
+              Dashbord="Dashbord"
               logout="logout"
               iconNavLink1={<FcReading style={icon}/>}
               iconNavLink2={<FcConferenceCall style={icon}/>}

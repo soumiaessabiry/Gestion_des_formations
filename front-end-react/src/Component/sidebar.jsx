@@ -45,6 +45,11 @@ const Sidebar=(props)=>{
                 <div className="d-grid gap-2 "  style={sid}>
                     <div >
                         <div  className="mt-5 pdashbor">
+                            <NavLink to="/Dashbord" style={navlik}>
+                                <p className="fw-bolder fs-5 title"  style={{display: isShown ? 'block' : 'none'}} >{props.Dashbord}</p>
+                            </NavLink>
+                        </div>
+                        <div  className="mt-5 pdashbor">
                             <NavLink to="/Formation" style={navlik}>
                                 <span>{props.iconNavLink1}</span>
                                 <p className="fw-bolder fs-5 title"  style={{display: isShown ? 'block' : 'none'}} >{props.NavLink1}</p>

@@ -66,10 +66,16 @@ const AfficheFormations=async(req,res)=>{
         throw Error("you don't have any formation")
     }
 }
+const CountFormation=async(req,res)=>{
+    const All_formations=await formationModel.find().countDocuments()
+        res.status(201).json(All_formations)
+}
 module.exports={
     Ajouterformation,
     UpdateFormation,
     DeletFormation,
     AfficheFormations,
+    CountFormation
+    
 
 }

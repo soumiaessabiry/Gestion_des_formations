@@ -83,6 +83,14 @@ const AllEmployee=async(req,res)=>{
     }
 
 }
+const countEmployee=async(req,res)=>{
+    let employe="employe"
+    const countemploye=await userModel.find({Role:employe}).countDocuments()
+        res.status(201).json(countemploye)
+
+    
+
+}
 
 const UpdateEmployee=async(req,res)=>{
     const {error}=validation_user(req.body)
@@ -117,5 +125,6 @@ module.exports={
     Logout,
     AllEmployee,
     UpdateEmployee,
-    Deletemploye
+    Deletemploye,
+    countEmployee
 }

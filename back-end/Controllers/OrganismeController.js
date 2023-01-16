@@ -53,6 +53,11 @@ const AfficherOrganismes=async(req,res)=>{
         throw Error("you don't have any Organismes")
     }
 }
+const countOrganisme=async(req,res)=>{
+    const countorganisme=await OrganismeModel.find().countDocuments()
+        res.status(200).json(countorganisme)
+    
+}
 
 
 
@@ -61,5 +66,6 @@ module.exports={
     Ajouterorganisme,
     UpdateOrganisme,
     DeletOrganisme,
-    AfficherOrganismes
+    AfficherOrganismes,
+    countOrganisme
 }

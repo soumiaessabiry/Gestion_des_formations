@@ -118,6 +118,8 @@ return(
             NavLink1="Formation"
             NavLink2="Employee"
             NavLink3="Organisme"
+            Dashbord="Dashbord"
+
             logout="logout"
             iconNavLink1={<FcReading style={icon}/>}
             iconNavLink2={<FcConferenceCall style={icon}/>}
@@ -126,46 +128,43 @@ return(
         />
     </div>
     <div className=" p-1 w-100" style={over} >
-        <Row className=" m-auto" style={bgg}>
-        <Navbar handleShow={handleShow} iconBsP={iconBsP}  />
-
-        </Row>
-        <Row className="  m-auto mt-3 bg-light text-dark ">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-        <div className="p-2  w-100">
-            <Table responsive="md">
-                <thead>
-                    <tr  className="py-2" style={bgg}>
-                        
-                        <th >Name organisme</th>
-                        <th >ville</th>
-                        <th >Address</th>
-                        <th >phone</th>
-                        <th >Option</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                   {Allorganismes.map((e)=>(
-                        <tr key={e._id}>
-                            <td>{e.name_organisme}</td>
-                            <td>{e.ville}</td>
-                            <td>{e.Address}</td>
-                            <td>{e.phone}</td>  
-                            <td className="" style={{display:"flex",padding: "1.5rem 0.5rem"}}>
-                                <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>setdataorganisme(e)}>
-                                    <AiFillEdit className="fs-3 text-success" />
-                                </button>
-                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "onClick={()=>{if(window.confirm('are you sure to delet this organisme'))DeletOrganisme(e._id)}}/></button> 
-                        </td>                       
-                        </tr>
-                    ))
-                   }
-                </tbody>
-            </Table>
-            </div>
+    <Row className=" m-auto" style={bgg}>
+    <Navbar handleShow={handleShow} iconBsP={iconBsP}  />
+    </Row>
+    <Row className="  m-auto mt-3 bg-light text-dark ">
+    <div className="row row-cols-1 row-cols-md-3 g-4">
+    <div className="p-2  w-100">
+        <Table responsive="md">
+            <thead>
+                <tr  className="py-2" style={bgg}>
+                    <th >Name organisme</th>
+                    <th >ville</th>
+                    <th >Address</th>
+                    <th >phone</th>
+                    <th >Option</th>
+                </tr>
+            </thead>
+            <tbody>
+            {Allorganismes.map((e)=>(
+                <tr key={e._id}>
+                    <td>{e.name_organisme}</td>
+                    <td>{e.ville}</td>
+                    <td>{e.Address}</td>
+                    <td>{e.phone}</td>  
+                    <td className="" style={{display:"flex",padding: "1.5rem 0.5rem"}}>
+                        <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>setdataorganisme(e)}>
+                            <AiFillEdit className="fs-3 text-success" />
+                        </button>
+                        <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "onClick={()=>{if(window.confirm('are you sure to delet this organisme'))DeletOrganisme(e._id)}}/></button> 
+                    </td>                       
+                </tr>
+            ))
+            }
+            </tbody>
+        </Table>
         </div>
-        </Row>
+    </div>
+    </Row>
     </div>  
     </div>
 
