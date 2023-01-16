@@ -90,10 +90,21 @@ const UpdateOrganisme=async(e)=>{
             setErrorapi(Response.data.error)
 
         }
- })
-.catch((err)=>{
-    console.log(err)
-})
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+//!Delet Organisme 
+const DeletOrganisme=async(id)=>{
+    await axios.delete(`http://localhost:4166/api/organisme/Deletorganisme/${id}`)
+    .then((Response)=>{
+            toast.loading('delet Organisme avec success')
+            window.location.reload(false);
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 }
 useEffect(()=>{
     AllOrganismes()
@@ -148,7 +159,7 @@ return(
                                 <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>setdataorganisme(e)}>
                                     <AiFillEdit className="fs-3 text-success" />
                                 </button>
-                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "/></button> 
+                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger "onClick={()=>{if(window.confirm('are you sure to delet this organisme'))DeletOrganisme(e._id)}}/></button> 
                         </td>                       
                         </tr>
                     ))
