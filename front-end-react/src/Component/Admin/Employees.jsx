@@ -16,6 +16,8 @@ const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
 const icon={"fontSize": "35px","color":"brown"}
 const iconBsP={"fontSize": "35px"}
+const err={color:'red'}
+
 const Employee=()=>{
     const baseUrl1="http://localhost:4166/api/organisme/AfficherOrganismes"
     const baseUrl2="http://localhost:4166/api/user/Ajouteremployee"
@@ -24,6 +26,9 @@ const Employee=()=>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const[Organisme,setOrganisme]=useState([])
+    const[Employes,setEmployee]=useState([])
+    const[Errorvalid,setErrorvalid]=useState("")
+
 
 //! ****Afficher organisme pour select****
     const AllOrganismes=async()=>{
@@ -34,6 +39,7 @@ const Employee=()=>{
         .catch((error)=>{
             console.log(error)
         })
+        
     }
 //! *********Add employee*******
     const [id_employe,setidemploye]=useState('')
@@ -56,24 +62,28 @@ const Employee=()=>{
         e.preventDefault()
         await axios.post(baseUrl2,dataemploye)
         .then((Response)=>{
-            toast.success('Add users success')
-            window.location.reload(false); 
+            if(Response.data.employe){
+                toast.success('Add employe success')
+                window.location.reload(false); 
+            }else{
+                setErrorvalid(Response.data.error)
+    
+            }
         })
         .catch((err)=>{
             console.log(err)
         })
     }
 //! *******Afficher all Employee******
-    const[Employee,setEmployee]=useState([])
-        const AllEmployee=async()=>{
-            await axios.get(baseUrl3)
-           .then((Response)=>{
-            setEmployee(Response.data)
-           })
-            .catch((err)=>{
-                console.log(err)
-            })
-        }
+const AllEmployee=async()=>{
+    await axios.get(baseUrl3)
+    .then((Response)=>{
+    setEmployee(Response.data.allemployee)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
 //! *********updat employee********
     const setemployedata = (e) => {
         setidemploye(e._id)
@@ -94,10 +104,14 @@ const Employee=()=>{
         e.preventDefault()
         axios.put(baseUrl4,dataupdate)
         .then((Response)=>{
-            toast.loading('updat user  success')
-            window.location.reload(false); 
+            if(Response.data.updatemploye){
+                toast.loading('updat user  success')
+                    window.location.reload(false);
+            }else{
+                setErrorvalid(Response.data.error)
+            }
         })
-        .cath((err)=>{
+        .catch((err)=>{
             console.log(err)
         })
     }
@@ -113,8 +127,9 @@ const DeletEmploye=async(id)=>{
     })
 }
 useEffect(()=>{
+    AllEmployee();
     AllOrganismes()
-    AllEmployee()
+
 },[])
     
     return(
@@ -153,20 +168,18 @@ useEffect(()=>{
                         </tr>
                     </thead>
                     <tbody>
-                      {Employee.map((e)=>(
-                          <tr key={e._id}>
-                          <td>{e.First_name}</td>
-                          <td>{e.Last_name}</td>
-                          <td>{e.Role}</td>
-                          <td>{e.email}</td>
-                          <td>{e.phone}</td>
-                          <td>{e.id_organisme}</td>
-                          <td>
-                          <td style={{display:"flex"}}>
-                          <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success"onClick={() =>setemployedata(e)}  /></button>
-                            <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this employee  ?')) DeletEmploye(e._id)}}/></button> 
-                          </td>
-                          </td>
+                      {Employes.map((e)=>(
+                        <tr key={e._id}>
+                            <td>{e.First_name}</td>
+                            <td>{e.Last_name}</td>
+                            <td>{e.Role}</td>
+                            <td>{e.email}</td>
+                            <td>{e.phone}</td>
+                            <td>{e.id_organisme}</td>
+                            <td style={{display:"flex"}}>
+                                <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success" onClick={() =>setemployedata(e)}  /></button>
+                                <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this employee  ?')) DeletEmploye(e._id)}}/></button> 
+                            </td>
                           </tr>
                       ))}
                     </tbody>
@@ -182,6 +195,8 @@ useEffect(()=>{
             <Modal.Title>Ajouter Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {(Errorvalid!="")?<span style={err}>{Errorvalid}</span>:""}
+
             <form method="POST" onSubmit={AddEmployee}>
                 <div className="mb-3">
                     <label className="col-form-label fs-6">first name</label>
@@ -204,7 +219,7 @@ useEffect(()=>{
                 <label  className="col-form-label fs-6">Organisme</label><br/>
                 <select className="form-select form-select-lg mb-3" onChange={(e)=>{setidorganisme(e.target.value)}}>
                     {Organisme.map((e) => (
-                    <option  value={e._id}>{e.name_organisme}</option>
+                    <option  key={e._id} value={e._id}>{e.name_organisme}</option>
                     ))}
                 </select>
                 </div>
@@ -228,6 +243,7 @@ useEffect(()=>{
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body text-dark">
+        {(Errorvalid!="")?<span style={err}>{Errorvalid}</span>:""}
         <form method="POST" onSubmit={UpdatEmploye}>
                 <div className="mb-3">
                     <label className="col-form-label fs-6">first name</label>

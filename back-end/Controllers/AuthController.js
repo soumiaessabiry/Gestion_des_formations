@@ -31,10 +31,10 @@ const Login=async(req,res)=>{
 
 
 const AjouterEmployee=async(req,res)=>{
-    // const {error}=validation_user(req.body)
-    // if(error){
-    //     return res.json({error:error.details[0].message})
-    // }
+    const {error}=validation_user(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     let email_user=req.body.email
     let password=req.body.password
     let id_organisme=req.body.id_organisme
@@ -46,7 +46,7 @@ const AjouterEmployee=async(req,res)=>{
         throw Error("email is areardy exist")
     }else{
         if(check_organisme){
-            const new_user=await userModel.create({
+            const employe=await userModel.create({
                 First_name:req.body.First_name,
                 Last_name:req.body.Last_name,
                 email:email_user,
@@ -55,7 +55,7 @@ const AjouterEmployee=async(req,res)=>{
                 id_organisme:id_organisme,
                
             })
-            res.status(201).json(new_user)
+            res.status(201).json({employe})
         }else{
             throw Error("Organisme is not existe")
 
@@ -74,15 +74,21 @@ const Logout=(req,res)=>{
 const AllEmployee=async(req,res)=>{
     let employe="employe"
     const allemployee=await userModel.find({Role:employe})
-    if(allemployee.length==0){
-        throw Error("Soryy collection users Vide")
+    if(allemployee){
+        res.status(201).json({allemployee})
+
     }else{
-        res.status(201).json(allemployee)
+        throw Error("users note existe")
 
     }
+
 }
 
 const UpdateEmployee=async(req,res)=>{
+    const {error}=validation_user(req.body)
+    if(error){
+        return res.json({error:error.details[0].message})
+    }
     const updatemploye=await userModel.findOneAndUpdate({_id:req.params.id},{$set:{
         First_name:req.body.First_name,
         Last_name:req.body.Last_name,
@@ -91,7 +97,7 @@ const UpdateEmployee=async(req,res)=>{
         id_organisme:req.body.id_organisme,
     }})
     if(updatemploye){
-        res.status(201).json(updatemploye)
+        res.status(201).json({updatemploye})
     }else{
         throw Error("Error to update employee")
     }

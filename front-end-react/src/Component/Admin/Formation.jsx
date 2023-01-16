@@ -15,6 +15,7 @@ const bgg={'background':'#0a58ca',"color":"azure","borderRadius":"10px"}
 const over={'overflow': 'auto'}
 const icon={"fontSize": "35px","color":"brown"}
 const iconBsP={"fontSize": "35px"}
+const err={color:'red'}
 
 const Formation=()=>{
     const [show, setShow] = useState(false);
@@ -28,6 +29,8 @@ const Formation=()=>{
     const [Date_debut,setDatedebut]=useState("")
     const [Date_Fin,setDateFin]=useState("")
     const [Desciption,setDesciption]=useState("")
+    const[Errorvalid,setErrorvalid]=useState("")
+
     const [Allformations,setAllformations]=useState([])
     const formData = new FormData();
         formData.append('Name_Formation',Name_Formation)
@@ -40,12 +43,17 @@ const Formation=()=>{
         e.preventDefault()
         await axios.post(baseUrl1,formData)
         .then((Response)=>{
-            toast.success('Ajouter formation avec success')
-            window.location.reload(false);
+            if(Response.data.Formation){
+                toast.success('Ajouter formation avec success')
+                window.location.reload(false);
+            }else{
+                setErrorvalid(Response.data.error)
+            }
         })
         .cath((err)=>{
             console.log(err)
         })
+       
     }
 //!Afficher formation 
 const AllFormations=async()=>{
@@ -76,8 +84,13 @@ const UpdateFormation=async(e)=>{
     e.preventDefault()
      await axios.put(`http://localhost:4166/api/formation/Updateformation/${id_formation}`,formationdataupdate)
     .then((Response)=>{
+        if(Response.data.update_formation){
         toast.loading('Upadate formation avec success')
-        window.location.reload(false);    
+        window.location.reload(false);  
+        }else{
+            setErrorvalid(Response.data.error)
+        }
+          
     })
     .catch((err)=>{
         console.log(err)
@@ -89,7 +102,13 @@ const DeletFormation=async(id)=>{
      axios.delete(`http://localhost:4166/api/formation/Deletformation/${id}`)
     .then((Response)=>{
         toast.loading('delet formation avec success')
-        window.location.reload(false);   
+        window.location.reload(false);  
+        if(Response.data.msg){
+            toast.success('Ajouter formation avec success')
+            window.location.reload(false);
+        }else{
+            setErrorvalid(Response.data.error)
+        } 
      })
     .catch((err)=>{
         console.log(err)
@@ -164,6 +183,8 @@ return(
             <Modal.Title>Ajouter Formation</Modal.Title>
     </Modal.Header>
         <Modal.Body>
+        {(Errorvalid!="")?<span style={err}>{Errorvalid}</span>:""}
+
             <form method="POST" onSubmit={AjouterFormation} encType="multipart/form-data">
                 <div className="mb-3">
                     <label className="col-form-label fs-6">Name Formation</label>
@@ -201,6 +222,8 @@ return(
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
             <div className="modal-body text-dark">
+            {(Errorvalid!="")?<span style={err}>{Errorvalid}</span>:""}
+
             <form method="POST" onSubmit={UpdateFormation} encType="multipart/form-data">
                 <div className="mb-3">
                     <label className="col-form-label fs-6">Name Formation</label>

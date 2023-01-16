@@ -7,6 +7,7 @@ const validation_user=(data)=>{
         email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
         phone:Joi.number(),
         password:Joi.string(),
+        id_organisme:Joi.string(),
     })
     return  schema.validate(data)
 
