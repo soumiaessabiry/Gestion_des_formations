@@ -74,13 +74,16 @@ const Logout=(req,res)=>{
 const AllEmployee=async(req,res)=>{
     let employe="employe"
     const allemployee=await userModel.find({Role:employe})
-    if(allemployee){
+    .populate([
+        {
+          path: 'id_organisme',  
+          model:OrganismeModel,
+          select: {name_organisme:1}
+      },
+    ])
         res.status(201).json({allemployee})
-
-    }else{
         throw Error("users note existe")
 
-    }
 
 }
 const countEmployee=async(req,res)=>{

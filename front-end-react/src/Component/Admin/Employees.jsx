@@ -176,7 +176,7 @@ useEffect(()=>{
                             <td>{e.Role}</td>
                             <td>{e.email}</td>
                             <td>{e.phone}</td>
-                            <td>{e.id_organisme}</td>
+                            <td>{e.id_organisme.name_organisme}</td>
                             <td style={{display:"flex"}}>
                                 <button className="btn"  data-bs-toggle="modal" data-bs-target="#exampleModal"  ><AiFillEdit className="fs-3 text-success" onClick={() =>setemployedata(e)}  /></button>
                                 <button className="btn"  ><RiDeleteBin2Fill className="fs-3 text-danger " onClick={()=>{if (window.confirm('Are you sure you wish to delete this employee  ?')) DeletEmploye(e._id)}}/></button> 
