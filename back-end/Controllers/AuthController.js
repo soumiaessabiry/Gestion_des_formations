@@ -1,5 +1,7 @@
 const userModel=require("../Models/UsersModel")
 const OrganismeModel=require("../Models/OraganismeModel")
+const formationmodel=require("../Models/FormationModel")
+const userformationmodel=require("../Models/Users_Formation_model")
 const jwt=require('jsonwebtoken')
 const  env=require("dotenv")
 const  bcrypt = require('bcryptjs');
@@ -122,6 +124,28 @@ const Deletemploye=async(req,res)=>{
         throw error("error to delet employee")
     }
 }
+const AssigneFormation=async(req,res)=>{
+    let id_user=req.body.id_user
+    let id_formation=req.body.id_formation
+    const checkformation=await userformationmodel.find({id_formation:id_formation})
+      if(checkformation.length===0){
+        const Assignerformation=await userformationmodel.create({
+            id_user:id_user,
+            id_formation:id_formation
+            })
+            if(Assignerformation){
+                res.json({Assignerformation})
+            }else{
+                res.send("error")
+            }
+        }else{
+            throw Error("formation deja assigne")
+
+      }
+        
+   
+    }
+
 module.exports={
     Login,
     AjouterEmployee,
@@ -129,5 +153,6 @@ module.exports={
     AllEmployee,
     UpdateEmployee,
     Deletemploye,
-    countEmployee
+    countEmployee,
+    AssigneFormation
 }
